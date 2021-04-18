@@ -6,9 +6,6 @@ import numpy
 import json
 
 
-# python parser.py --start 2021-04-18_03:33:00 --end 2021-04-18_03:33:06 --work_dir ../results
-
-
 def main():
     args_parser = argparse.ArgumentParser()
     args_parser.add_argument('--start')
@@ -27,8 +24,6 @@ def main():
 
     with open(os.path.join(args.work_dir, 'report.json'), "w") as f:
         json.dump(report, f, indent=4)
-
-
 
 
 def performance_report(file_name, work_dir, start_time, end_time):
