@@ -36,7 +36,7 @@ def performance_report(file_name, work_dir, start_time, end_time):
     filtered_percents = [percent for time, percent in datetime_percent if start_time <= time <= end_time]
 
     result = dict()
-    # result['file_name'] = file_name
+
     result['start'] = start_time.strftime('%Y-%m-%d %H:%M:%S')
     result['end'] = end_time.strftime('%Y-%m-%d %H:%M:%S')
     result['min'] = round(min(filtered_percents), 1)
