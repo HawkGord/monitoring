@@ -18,9 +18,9 @@ def main():
 
     result_files = ['gpu.txt', 'cpu.txt', 'ram.txt']
 
-    report = dict()
+    report = []
     for file in result_files:
-        report[file] = performance_report(file, args.work_dir, start_time, end_time)
+        report.append(performance_report(file, args.work_dir, start_time, end_time))
 
     with open(os.path.join(args.work_dir, 'report.json'), "w") as f:
         json.dump(report, f, indent=4)
@@ -37,11 +37,17 @@ def performance_report(file_name, work_dir, start_time, end_time):
 
     result = dict()
 
+    result['file_name'] = file_name
     result['start'] = start_time.strftime('%Y-%m-%d %H:%M:%S')
     result['end'] = end_time.strftime('%Y-%m-%d %H:%M:%S')
-    result['min'] = round(min(filtered_percents), 1)
-    result['max'] = round(max(filtered_percents), 1)
-    result['mean'] = round(numpy.mean(filtered_percents), 1)
+    try:
+        result['min'] = round(min(filtered_percents), 1)
+        result['max'] = round(max(filtered_percents), 1)
+        result['mean'] = round(numpy.mean(filtered_percents), 1)
+    except Exception as err:
+        result['min'] = []
+        result['max'] = []
+        result['mean'] = []
     return result
 
 
